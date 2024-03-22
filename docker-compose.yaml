@@ -1,0 +1,15 @@
+services:
+  postgresql:
+    container_name: deepfake_postgresql
+    image: postgres:15
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - .data/db:/var/lib/postgresql/data
+    ports: 
+      - '${DB_PORT}:5432'
+    environment:
+      POSTGRES_USER: '${DB_PASSWORD}'
+      POSTGRES_PASSWORD: '${DB_USERNAME}'
+      POSTGRES_DB: '${DB_DATABASE}'
